@@ -2010,7 +2010,7 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-900">
       <div className="sticky top-0 z-40 border-b border-zinc-200/70 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-4 px-6">
+        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-600 to-sky-400 shadow-sm shadow-sky-500/20">
               <div className="h-4 w-4 rounded-sm bg-white/90" />
@@ -2073,9 +2073,35 @@ export default function Page() {
             </div>
           </div>
         </div>
+
+        {/* 移动端横滚导航 */}
+        <nav className="border-t border-zinc-100 bg-white/80 md:hidden">
+          <div className="mx-auto max-w-[1400px] overflow-x-auto px-3 py-2">
+            <div className="flex w-max items-center gap-1.5">
+              {navItems.map((item) => {
+                const active = activeNav === item.key;
+                return (
+                  <button
+                    key={item.key}
+                    type="button"
+                    onClick={() => setActiveNav(item.key)}
+                    className={cn(
+                      "shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
+                      active
+                        ? "bg-zinc-900 text-white"
+                        : "bg-zinc-100 text-zinc-700 active:bg-zinc-200",
+                    )}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </nav>
       </div>
 
-      <main className="mx-auto max-w-[1400px] px-6 pb-16 pt-8">
+      <main className="mx-auto max-w-[1400px] px-4 pb-24 pt-6 sm:px-6 sm:pb-16 sm:pt-8">
         {activeNav === "overview" && (
         <>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
